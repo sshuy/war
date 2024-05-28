@@ -8,7 +8,6 @@ class CardGame:
     def play(self):
         print("Nothing to play...")
 
-
 class War(CardGame):
     def __init__(self):
         super().__init__()
@@ -26,8 +25,6 @@ class War(CardGame):
             dealt_hand.append(self.deck.deal_card())
         return dealt_hand
 
-    # don't touch below this line
-
     def __battle(self):
         player1_pile = []
         player2_pile = []
@@ -39,13 +36,16 @@ class War(CardGame):
                 random.shuffle(player1_pile)
                 self.player1_hand = player1_pile.copy()
                 player1_pile.clear()
+
             if len(self.player2_hand) == 0:
                 random.shuffle(player2_pile)
                 self.player2_hand = player2_pile.copy()
                 player2_pile.clear()
+
             card1 = self.player1_hand.pop()
             card2 = self.player2_hand.pop()
             print(f"{card1} vs {card2}")
+
             if card1 > card2:
                 player1_pile.append(card1)
                 player1_pile.append(card2)
@@ -59,6 +59,7 @@ class War(CardGame):
             else:
                 ties += 1
                 print("Tie! Both players draw a card and play again")
+
         print("------------------------------------------")
         print("Game over!")
         print("------------------------------------------")
@@ -67,18 +68,14 @@ class War(CardGame):
         print(f"Ties: {ties}")
         print("==========================================")
 
-
 SUITS = ["Clubs", "Diamonds", "Hearts", "Spades"]
-
 RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
-
 
 def index_of(lst, item) -> int | None:
     for i in range(len(lst)):
         if lst[i] == item:
             return i
     return None
-
 
 class Card:
     def __init__(self, rank, suit):
@@ -112,7 +109,6 @@ class Card:
     def __str__(self):
         return f"{self.rank} of {self.suit}"
 
-
 class DeckOfCards:
     def __init__(self):
         self.__cards = []
@@ -131,16 +127,14 @@ class DeckOfCards:
             return None
         return self.__cards.pop(0)
 
-
 def test(seed):
     random.seed(seed)
     war = War()
     war.play()
 
-
 def main():
     test(1)
     test(2)
 
-
-main()
+if __name__ == "__main__":
+    main()
